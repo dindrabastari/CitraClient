@@ -20,4 +20,6 @@
     <string name="title_activity_top_up">TopUpActivity</string>
     <string name="title_activity_pesan_taksi">Pesan Taksi</string>
     <string name="title_activity_fucking_menu">FuckingMenuActivity</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_register">RegisterActivity</string>
 </resources>

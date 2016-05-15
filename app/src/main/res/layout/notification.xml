@@ -6,9 +6,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:showIn="@layout/activity_top_up"
-    tools:context="com.kodemerah.android.citraclient.TopUpActivity">
+    app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
     <LinearLayout
         android:orientation="vertical"
@@ -16,30 +14,25 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center">
 
-        <EditText
-            android:layout_width="match_parent"
+        <TextView
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="number"
-            android:ems="10"
-            android:id="@+id/editText3"
-            android:layout_gravity="center"
-            android:hint="Kode Voucher"
-            android:layout_marginBottom="16dp"
-            android:maxLength="19"
-            android:minLines="19"
-            android:numeric="integer"
-            android:textSize="25sp"
-            android:text="1234-5678-9012-3745"
-            android:textAlignment="center" />
+            android:layout_marginBottom="@dimen/activity_vertical_margin"
+            android:text="Gagal!\nKode voucher yang anda masukan salah!"
+            android:id="@+id/textView"
+            android:layout_gravity="center_horizontal"
+            android:textSize="30sp"
+            android:textAlignment="center"
+            android:textColor="#c12d2d" />
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Top Up"
-            android:id="@+id/btnSubmitTopUp"
-            android:layout_gravity="center"
-            android:onClick="submittopupClick"
-            style="@style/Widget.AppCompat.Button.Colored"/>
+            android:text="Back"
+            android:onClick="notifClick"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:id="@+id/button"
+            android:layout_gravity="center_horizontal" />
     </LinearLayout>
 
     <LinearLayout
