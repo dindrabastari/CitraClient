@@ -21,7 +21,7 @@
             android:layout_height="wrap_content"
             android:inputType="textNoSuggestions|textEmailAddress"
             android:ems="10"
-            android:id="@+id/txtUsername"
+            android:id="@+id/txtEmail"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:hint="Test"

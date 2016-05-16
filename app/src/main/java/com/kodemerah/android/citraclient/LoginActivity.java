@@ -20,7 +20,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     // Email, password edittext
-    EditText txtUsername, txtPassword;
+    EditText txtEmail, txtPassword;
 
     // login button
     Button btnLogin, btnSignUp;
@@ -31,8 +31,8 @@ public class LoginActivity extends AppCompatActivity {
     // Session Manager Class
     SessionManager session;
 
-    public static final String LOGIN_URL = "http://freya.schenker.co.id/tas/index.php/mobile/login";
-    public static final String LOGIN_UNAME = "username";
+    public static final String LOGIN_URL = "http://10.0.3.2/citra/index.php/mobile/login_customer";
+    public static final String LOGIN_EMAIL = "email";
     public static final String LOGIN_PWD = "password";
     private String[] users = new String[2];
 
@@ -45,10 +45,8 @@ public class LoginActivity extends AppCompatActivity {
         session = new SessionManager(getApplicationContext());
 
         // Email, Password input text
-        txtUsername = (EditText) findViewById(R.id.txtUsername);
+        txtEmail = (EditText) findViewById(R.id.txtEmail);
         txtPassword = (EditText) findViewById(R.id.txtPassword);
-
-        Toast.makeText(getApplicationContext(), "User Login Status: " + session.isLoggedIn(), Toast.LENGTH_LONG).show();
 
 
         // Login button
@@ -69,33 +67,17 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View arg0) {
                 // Get username, password from EditText
-                String username = txtUsername.getText().toString();
+                String email = txtEmail.getText().toString();
                 String password = txtPassword.getText().toString();
 
+                users[0] = email;
+                users[1] = password;
+
                 // Check if username, password is filled
-                if (username.trim().length() > 0 && password.trim().length() > 0) {
-                    // For testing puspose username, password is checked with sample data
-                    // username = test
-                    // password = test
-                    if (username.equals("test") && password.equals("test")) {
-
-                        // Creating user login session
-                        // For testing i am stroing name, email as follow
-                        // Use user real data
-                        session.createLoginSession("1", "Android Hive", "anroidhive@gmail.com");
-
-                        // Staring MainActivity
-                        Intent i = new Intent(getApplicationContext(), MenuActivity.class);
-                        startActivity(i);
-                        finish();
-
-                    } else {
-                        // username / password doesn't match
-                        alert.showAlertDialog(LoginActivity.this, "Login failed..", "Username/Password is incorrect", false);
-                    }
+                if (email.trim().length() > 0 && password.trim().length() > 0) {
+                    loginLogic();
+//                    Toast.makeText(getBaseContext(), email + " - " + password,Toast.LENGTH_LONG).show();
                 } else {
-                    // user didn't entered username or password
-                    // Show alert asking him to enter the details
                     alert.showAlertDialog(LoginActivity.this, "Login failed..", "Please enter username and password", false);
                 }
 
@@ -134,18 +116,18 @@ public class LoginActivity extends AppCompatActivity {
                     Intent i = new Intent(getApplicationContext(), MenuActivity.class);
                     startActivity(i);
                     finish();
-                    Toast.makeText(getApplicationContext(), "Welcome, " + user[0], Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Welcome, " + user[1], Toast.LENGTH_LONG).show();
                 }
 
             }
 
             @Override
             protected String doInBackground(String... params) {
-                String username = params[0];
+                String email = params[0];
                 String password = params[1];
 
                 HashMap<String,String> data = new HashMap<>();
-                data.put(LOGIN_UNAME, username);
+                data.put(LOGIN_EMAIL, email);
                 data.put(LOGIN_PWD, password);
 
                 String result = rh.sendPostRequest(LOGIN_URL,data);
@@ -173,12 +155,12 @@ public class LoginActivity extends AppCompatActivity {
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
                 String status = jsonObject.optString("status").toString();
                 String id = jsonObject.optString("id_customer").toString();
-                String username = jsonObject.optString("username").toString();
-                String name = jsonObject.optString("nama").toString();
+                String email = jsonObject.optString("email").toString();
+                String nama = jsonObject.optString("nama").toString();
                 if (!status.equals("sukses")){
                     data = status;
                 }else{
-                    data = id + "###" + name + "###" + username;
+                    data = id + "###" + nama + "###" + email;
                 }
 
             }

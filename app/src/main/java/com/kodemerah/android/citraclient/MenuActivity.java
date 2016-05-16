@@ -13,6 +13,7 @@ public class MenuActivity extends AppCompatActivity {
 
     AlertDialogManager alert = new AlertDialogManager();
 
+    String name, email, id;
 
 
     @Override
@@ -23,15 +24,24 @@ public class MenuActivity extends AppCompatActivity {
         session = new SessionManager(getApplicationContext());
         session.checkLogin();
         HashMap<String, String> user = session.getUserDetails();
-        // name
-        String name = user.get(SessionManager.KEY_NAME);
-        // email
-        String email = user.get(SessionManager.KEY_EMAIL);
+        name = user.get(SessionManager.KEY_NAME);
+        email = user.get(SessionManager.KEY_EMAIL);
+        id = user.get(SessionManager.KEY_ID);
     }
 
-    public void pesantaksiClick(View v){startActivity(new Intent(this, ProfileActivity.class));}
-    public void myorderClick(View v){startActivity(new Intent(this, OrderActivity.class));}
-    public void profileClick(View v){startActivity(new Intent(this, ProfileActivity.class));}
+    public void pesantaksiClick(View v){
+        startActivity(new Intent(this, ProfileActivity.class));
+    }
+
+    public void myorderClick(View v){
+        Intent i = new Intent(this, OrderActivity.class);
+        startActivity(i);
+    }
+
+    public void profileClick(View v){
+        startActivity(new Intent(this, ProfileActivity.class));
+    }
+
     public void signoutClick(View v){session.logoutUser();}
 
 }
