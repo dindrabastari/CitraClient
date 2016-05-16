@@ -31,7 +31,7 @@ public class LoginActivity extends AppCompatActivity {
     // Session Manager Class
     SessionManager session;
 
-    public static final String LOGIN_URL = "http://10.0.3.2/citra/index.php/mobile/login_customer";
+    public static final String LOGIN_URL = "http://dindrabastari.esy.es/citra/index.php/mobile/login_customer";
     public static final String LOGIN_EMAIL = "email";
     public static final String LOGIN_PWD = "password";
     private String[] users = new String[2];
@@ -106,17 +106,19 @@ public class LoginActivity extends AppCompatActivity {
 //                Toast.makeText(getApplicationContext(), s, Toast.LENGTH_LONG).show();
                 if(s.equals("Username dan Password tidak cocok")){
                     alert.showAlertDialog(LoginActivity.this, "Login Failed..", "Username/Password is incorrect", false);
-                } else if(s.equals("Maaf, anda tidak memiliki hak akses")){
-                    alert.showAlertDialog(LoginActivity.this, "Login Failed..", "Your account have no access", false);
                 } else if(s.equals("Error Registering")){
                     alert.showAlertDialog(LoginActivity.this, "Login Failed..", "Check your connection", false);
                 } else {
                     String user[]  = s.split("###");
-                    session.createLoginSession(user[0], user[1], user[2]);
-                    Intent i = new Intent(getApplicationContext(), MenuActivity.class);
-                    startActivity(i);
-                    finish();
-                    Toast.makeText(getApplicationContext(), "Welcome, " + user[1], Toast.LENGTH_LONG).show();
+                    if (user.length > 1) {
+                        session.createLoginSession(user[0], user[1], user[2]);
+                        Intent i = new Intent(getApplicationContext(), MenuActivity.class);
+                        startActivity(i);
+                        finish();
+                        Toast.makeText(getApplicationContext(), "Welcome, " + user[1], Toast.LENGTH_LONG).show();
+                    }else{
+                        alert.showAlertDialog(LoginActivity.this, "Login Failed..", "Check your connection", false);
+                    }
                 }
 
             }

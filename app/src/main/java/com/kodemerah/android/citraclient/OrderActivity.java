@@ -32,7 +32,7 @@ public class OrderActivity extends AppCompatActivity{
     // Session Manager Class
     SessionManager session;
 
-    public static final String ORDER_URL = "http://10.0.3.2/citra/index.php/mobile/get_all_order_customer";
+    public static final String ORDER_URL = "http://dindrabastari.esy.es/citra/index.php/mobile/get_all_order_customer";
     public static final String ORDER_ID = "id";
     private String order_id;
 

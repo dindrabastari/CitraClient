@@ -30,7 +30,7 @@ public class MenuActivity extends AppCompatActivity {
     }
 
     public void pesantaksiClick(View v){
-        startActivity(new Intent(this, ProfileActivity.class));
+        startActivity(new Intent(this, PesanTaksiActivity.class));
     }
 
     public void myorderClick(View v){
