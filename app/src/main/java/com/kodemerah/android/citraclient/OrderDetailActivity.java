@@ -2,7 +2,6 @@ package com.kodemerah.android.citraclient;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -111,7 +110,7 @@ public class OrderDetailActivity extends AppCompatActivity {
             txtCost.setText(biaya);
             txtDriverName.setText(nama_driver);
             txtDriverNo.setText(nopol);
-            ivDriverPhoto.setImageURI(Uri.parse(foto_driver));
+
 
             cvProgress.setVisibility(View.GONE);
             btnCancel.setVisibility(View.GONE);
@@ -231,6 +230,9 @@ public class OrderDetailActivity extends AppCompatActivity {
                 super.onPostExecute(s);
                 loading.dismiss();
                 if(s.equals("sukses")){
+                    Intent i = new Intent(getApplicationContext(), NotificationActivity.class);
+                    i.putExtra("EXTRA_TEXT","Pesanan anda berhasil di batalkan!");
+                    startActivity(i);
                     finish();
                 }else{
                     alert.showAlertDialog(OrderDetailActivity.this, "Failure..", "Failed to cancel your order", false);

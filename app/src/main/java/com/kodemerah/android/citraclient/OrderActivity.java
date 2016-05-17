@@ -135,7 +135,7 @@ public class OrderActivity extends AppCompatActivity{
         public void onBindViewHolder(OrderViewHolder orderViewHolder, int i) {
             orderViewHolder.orderDestination.setText(orders.get(i).lokasi_tujuan);
             orderViewHolder.orderDate.setText(orders.get(i).tanggal_pemesanan);
-            if (orders.get(i).status_pemesanan == "SELESAI") {
+            if (orders.get(i).status_pemesanan.equals("SELESAI")) {
                 orderViewHolder.orderStatus.setImageResource(R.drawable.ic_check_circle_white_24dp);
             }else{
                 orderViewHolder.orderStatus.setImageResource(R.drawable.ic_local_taxi_white_24dp);
