@@ -74,6 +74,9 @@
             android:name=".NotificationActivity"
             android:label="Notification"
             android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.kodemerah.android.citraclient.MenuActivity" />
         </activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.

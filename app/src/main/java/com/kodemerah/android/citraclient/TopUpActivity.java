@@ -1,6 +1,7 @@
 package com.kodemerah.android.citraclient;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -81,6 +82,9 @@ public class TopUpActivity extends AppCompatActivity {
                 super.onPostExecute(s);
                 loading.dismiss();
                 if(s.equals("sukses")){
+                    Intent i = new Intent(getApplicationContext(), NotificationActivity.class);
+                    i.putExtra("EXTRA_TEXT","Selamat!\nVoucher anda berhasil digunakan!");
+                    startActivity(i);
                     finish();
                 }else{
                     alert.showAlertDialog(TopUpActivity.this, "Failure..", "Check your voucher code", false);

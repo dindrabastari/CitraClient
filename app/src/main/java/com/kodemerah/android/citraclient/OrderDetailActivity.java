@@ -150,7 +150,7 @@ public class OrderDetailActivity extends AppCompatActivity {
                     biaya = orderDet[4];
                 }else if (status_pemesanan.equals("SELESAI")) {
                     biaya = orderDet[4];
-                    foto_driver = orderDet[5];
+                    foto_driver = "http://dindrabastari.esy.es/citra/"+orderDet[5];
                     nopol = orderDet[6];
                     nama_driver = orderDet[7];
                 }

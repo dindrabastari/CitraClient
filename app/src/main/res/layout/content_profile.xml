@@ -37,15 +37,6 @@
             android:textSize="20dp"
             android:onClick="topupClick"
             style="@style/Widget.AppCompat.Button.Borderless.Colored" />
-
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Edit Profile"
-            android:id="@+id/btnEditProfile"
-            android:textSize="20dp"
-            android:onClick="editprofileClick"
-            style="@style/Widget.AppCompat.Button.Borderless.Colored" />
     </LinearLayout>
 </LinearLayout>
 
