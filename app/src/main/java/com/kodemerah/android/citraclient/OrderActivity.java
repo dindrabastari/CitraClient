@@ -171,7 +171,7 @@ public class OrderActivity extends AppCompatActivity{
                 super.onPostExecute(s);
                 loading.dismiss();
 
-                if(s.equals("NO DATA")){
+                if(s.equals("kosong")){
                     alert.showAlertDialog(OrderActivity.this, "My Order..", "You have no order history!", false);
                 }else{
                     OrderAdapter adapter = new OrderAdapter(orders);

@@ -35,6 +35,7 @@ public class OrderDetailActivity extends AppCompatActivity {
     SessionManager session;
 
     public static final String ORDER_URL = "http://dindrabastari.esy.es/citra/index.php/mobile/get_order_customer";
+    public static final String CANCEL_ORDER_URL = "http://dindrabastari.esy.es/citra/index.php/mobile/cancel_order";
     public static final String ORDER_ID = "id";
     private String orders_id;
 
@@ -116,7 +117,11 @@ public class OrderDetailActivity extends AppCompatActivity {
             btnCancel.setVisibility(View.GONE);
             btnPay.setVisibility(View.GONE);
         }
-        getSupportActionBar().setTitle("#"+id_pemesanan);
+        getSupportActionBar().setTitle("#" + id_pemesanan);
+    }
+
+    public void cancelorderClick(View v){
+        cancelOrderLogic();
     }
 
     private void orderLogic(){
@@ -137,8 +142,8 @@ public class OrderDetailActivity extends AppCompatActivity {
                 loading.dismiss();
                 String[] orderDet = s.split("###");
                 String id_pemesanan = orderDet[0];
-                String lokasi_jemput = orderDet[1];
-                String lokasi_tujuan = orderDet[2];
+                String lokasi_jemput = String.valueOf(orderDet[1]);
+                String lokasi_tujuan = String.valueOf(orderDet[2]);
                 String status_pemesanan = orderDet[3];
                 String biaya = "", nama_driver = "", foto_driver = "", nopol = "";
                 if (status_pemesanan.equals("SAMPAI")) {
@@ -204,6 +209,66 @@ public class OrderDetailActivity extends AppCompatActivity {
                         data = id_pemesanan + "###" + lokasi_jemput + "###" + lokasi_tujuan + "###" + status_pemesanan;
                     }
                 }
+            }
+        } catch (JSONException e) {e.printStackTrace();}
+        return data;
+    }
+
+    private void cancelOrderLogic(){
+        class OrderLogic extends AsyncTask<String,Void,String> {
+
+            ProgressDialog loading;
+            RequestHandler rh = new RequestHandler();
+
+            @Override
+            protected void onPreExecute() {
+                super.onPreExecute();
+                loading = ProgressDialog.show(OrderDetailActivity.this, "Cancelling Order", "Please wait...", true, true);
+            }
+
+            @Override
+            protected void onPostExecute(String s) {
+                super.onPostExecute(s);
+                loading.dismiss();
+                if(s.equals("sukses")){
+                    finish();
+                }else{
+                    alert.showAlertDialog(OrderDetailActivity.this, "Failure..", "Failed to cancel your order", false);
+                }
+            }
+
+            @Override
+            protected String doInBackground(String... params) {
+                String id = params[0];
+
+                HashMap<String,String> data = new HashMap<>();
+                data.put(ORDER_ID, id);
+
+                String result = rh.sendPostRequest(CANCEL_ORDER_URL,data);
+                if(!result.equals("Error Registering")){
+                    result = cancelJSONParse(result);
+                }
+                return result;
+            }
+        }
+
+        OrderLogic lol = new OrderLogic();
+        lol.execute(orders_id);
+    }
+
+    private String cancelJSONParse(String myJSON){
+        String data = "";
+        try {
+            JSONObject jsonRootObject = new JSONObject(myJSON);
+
+            //Get the instance of JSONArray that contains JSONObjects
+            JSONArray jsonArray = jsonRootObject.optJSONArray("result");
+
+            //Iterate the jsonArray and print the info of JSONObjects
+            for(int i=0; i < jsonArray.length(); i++){
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                String status = jsonObject.optString("status").toString();
+                data = status;
             }
         } catch (JSONException e) {e.printStackTrace();}
         return data;

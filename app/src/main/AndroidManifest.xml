@@ -70,6 +70,11 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.kodemerah.android.citraclient.LoginActivity" />
         </activity>
+        <activity
+            android:name=".NotificationActivity"
+            android:label="Notification"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -92,7 +97,7 @@
             android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.kodemerah.android.citraclient.MenuActivity" />
+                android:value=".MenuActivity" />
         </activity>
     </application>
 

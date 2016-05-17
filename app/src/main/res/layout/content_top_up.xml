@@ -21,15 +21,14 @@
             android:layout_height="wrap_content"
             android:inputType="number"
             android:ems="10"
-            android:id="@+id/editText3"
+            android:id="@+id/txtKode"
             android:layout_gravity="center"
             android:hint="Kode Voucher"
             android:layout_marginBottom="16dp"
-            android:maxLength="19"
-            android:minLines="19"
+            android:maxLength="15"
+            android:minLines="15"
             android:numeric="integer"
             android:textSize="25sp"
-            android:text="1234-5678-9012-3745"
             android:textAlignment="center" />
 
         <Button
